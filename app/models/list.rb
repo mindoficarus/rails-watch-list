@@ -1,6 +1,9 @@
 class List < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  # Asociaciones
+  has_many :bookmarks, dependent: :destroy # El destroy hará que se elimine una lista la cual está linkeada se eliminan los bookmark dentro.
+  has_many :movies, through: :bookmarks
 
-  has_many :bookmarks, dependent: :destroy
-  has_many :movies, through: :bookmarks, dependent: :destroy
+  # Validaciones
+  validates :name, presence: true
+  validates :name, uniqueness: true
 end
